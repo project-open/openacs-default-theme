@@ -1,9 +1,7 @@
-<master src="/www/blank-master">
-<if @doc@ defined><property name="&doc">doc</property></if>
-<if @body@ defined><property name="&body">body</property></if>
-<if @head@ not nil><property name="head">@head;literal@</property></if>
-<if @focus@ not nil><property name="focus">@focus;literal@</property></if>
-<property name="skip_link">@skip_link;literal@</property>
+<html>
+<link rel="stylesheet" href="/resources/openacs-default-theme/styles/default-master.css" type="text/css" media="all">
+<title>@title@</title>
+<body>
 
 <div id="wrapper">
     <div id="system-name">
@@ -65,63 +63,4 @@
       </div>
     </list>
   </if>
-
-  <div id="content-wrapper">
-    <div class="block-marker">Begin main content</div>
-    <div id="inner-wrapper">
-        
-    <if @user_messages:rowcount@ gt 0>
-      <div id="alert-message">
-        <multiple name="user_messages">
-          <div class="alert">
-            <strong>@user_messages.message;noquote@</strong>
-          </div>
-         </multiple>
-       </div>
-     </if>
-
-     <if @main_content_p@>
-       <div id="main">
-         <div id="main-content">
-           <div class="main-content-padding">
-             <slave />
-           </div>
-         </div>
-       </div>
-     </if>
-     <else>
-       <slave />
-     </else>
-
-    </div>
-  </div> <!-- /content-wrapper -->
-
-  <comment>
-    TODO: remove this and add a more systematic / package independent way 
-    TODO  of getting this content here
-  </comment>
-  <if @curriculum_bar_p@ true><include src="/packages/curriculum/lib/bar" /></if>
-
-  <comment> empty UL gives a validation error for the W3C validator 
-  </comment>
-
-  <if @num_of_locales@ gt 1 or @locale_admin_url@ not nil>
-  <div id="footer">
-    <div class="block-marker">Begin footer</div>
-    <div id="footer-links">
-      <ul class="compact">
-      <if @num_of_locales@ gt 1>
-        <li><a href="@change_locale_url@">#acs-subsite.Change_locale_label#</a></li>
-      </if>
-      <else>
-        <if @locale_admin_url@ not nil>
-          <li><a href="@locale_admin_url@">Install locales</a></li>
-        </if>
-      </else>
-      </ul>
-    </div>
-  </div> <!-- /footer -->
-  </if>
-
-</div> <!-- /wrapper -->
 
